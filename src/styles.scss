@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+@import "margins";
+@import "fonts";
+
+:root{
+    --backGr-color: #292F3F;
+    --greyBtn-color: #42566C;
+    --greyMessage-color: #373E4E;
+    --darkMessage-color: #272A35;
+    --sendMessageButton-color: #C4C4C4;
+    --light-color: #FFFFFF;
+    --inputBorder-color: #818182;
+}
+
+*,
+*after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--backGr-color);
+    color: var(--light-color);
+    font-family: 'Roboto', sans-serif;
+}
+

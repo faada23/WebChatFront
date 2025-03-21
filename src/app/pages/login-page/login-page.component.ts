@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth/auth.Service';
 
 @Component({
   selector: 'app-login-page',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './login-page.component.scss'
 })
 export class LoginPageComponent {
-  //authService = inject(AuthService);
+  authService = inject(AuthService);
   router = inject(Router)
   
   form = new FormGroup({
@@ -19,7 +20,11 @@ export class LoginPageComponent {
 
   onSubmit(){
     if(this.form.valid){
-      
+      if(this.form.valid){
+        //@ts-ignore 
+        this.authService.login(this.form.value).subscribe()
+        
+      }
     }    
 }
 }

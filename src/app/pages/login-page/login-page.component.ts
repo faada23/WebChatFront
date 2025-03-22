@@ -20,11 +20,11 @@ export class LoginPageComponent {
 
   onSubmit(){
     if(this.form.valid){
-      if(this.form.valid){
-        //@ts-ignore 
-        this.authService.login(this.form.value).subscribe()
-        
-      }
+      //@ts-ignore 
+      this.authService.login(this.form.value).subscribe(
+        () => {
+          this.router.navigate([''])
+        })
     }    
 }
 }

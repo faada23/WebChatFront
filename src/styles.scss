@@ -3,12 +3,16 @@
 
 :root{
     --backGr-color: #292F3F;
-    --greyBtn-color: #42566C;
+    --grey-color: #42566C;
     --greyMessage-color: #373E4E;
     --darkMessage-color: #272A35;
     --sendMessageButton-color: #C4C4C4;
     --light-color: #FFFFFF;
+    --dark-color: #1f232f;
     --inputBorder-color: #818182;
+    --scrollbarTrack-color: #2c2f33;
+    --scrollbarThumb-color: #7289da;
+    --scrollbarThumbHover-color: #5b6eae;
 }
 
 *,
@@ -24,3 +28,20 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+::-webkit-scrollbar {
+    width: 12px; 
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbarTrack-color); 
+    border-radius: 10px; 
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbarThumb-color);
+    border-radius: 10px; 
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbarThumbHover-color);
+  }

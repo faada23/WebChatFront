@@ -1,1 +1,17 @@
-<p>sidebar works!</p>
+<div class="sidebar-container">
+    <div class="header">
+      <h2>Chats</h2>
+    </div>
+    
+    <div class="chats-list">
+      <app-sidebar-chat 
+        *ngFor="let chat of chats"
+        [chat]="chat"
+        (selected)="onChatSelected($event)"
+      ></app-sidebar-chat>
+      
+      <div *ngIf="chats.length === 0" class="no-chats">
+        No chats available
+      </div>
+    </div>
+  </div>

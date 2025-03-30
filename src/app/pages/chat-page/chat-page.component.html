@@ -6,13 +6,13 @@
     
     <div class="messages">
       <div *ngFor="let msg of messages" class="message">
-        <strong>{{ msg.user }}:</strong> {{ msg.content }}
+        <strong>{{ msg.sender.username }}:</strong> {{ msg.content }}
       </div>
     </div>
     
     <span class="input">
       <input class="input-text" [(ngModel)]="message" placeholder="Type a message" />
-      <button class="send-msg-btn" (click)="sendMessage()">
+      <button class="send-msg-btn" (click)="sendMessage(selectedChatId!,message)">
         <img 
           class="send-msg-img" 
           src="../assets/svgs/group.svg" 

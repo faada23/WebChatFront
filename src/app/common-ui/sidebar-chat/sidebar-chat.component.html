@@ -1,0 +1,11 @@
+<div class="chat-item" (click)="selected.emit(chat.id)">
+    <div class="chat-avatar">
+      <div class="avatar-placeholder">
+        {{ chat.name| slice:0:1 | uppercase }}
+      </div>
+    </div>
+    <div class="chat-info">
+      <h4 class="chat-name">{{ chat.name }}</h4>
+      <p class="chat-type">{{ getDisplayedChatType() }}</p>
+    </div>
+  </div>

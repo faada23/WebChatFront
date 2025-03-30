@@ -1,7 +1,7 @@
 import { Component, inject, NgModule} from '@angular/core';
 import { SidebarComponent } from "../../common-ui/sidebar/sidebar.component";
 import { ChatService } from '../../data/services/chat.service';
-import { Message } from '../../data/interfaces/message.interface';
+import { getMessage } from '../../data/interfaces/getMessage.interface';
 import { NgForOf } from '@angular/common';
 import { FormsModule} from '@angular/forms';
 import { ProfileService } from '../../data/services/profile.service';
@@ -15,22 +15,33 @@ import { ProfileService } from '../../data/services/profile.service';
 
 export class ChatPageComponent{
   profileService = inject(ProfileService);
+
   public user: string = '';
   public message: string = '';
-  public messages: Message[] = []; 
-  public chats : any[] = [];
+  public messages: getMessage[] = []; 
+  public chats: any[] = [];
+  public selectedChatId: number |null = null;
+
+
 
   constructor(private chatService: ChatService)
   { 
-    this.profileService.getUserChats().subscribe(chats => {this.chats = chats});
-    this.chatService.hubConnection?.on('ReceiveMessage', (user: string, content: string) => {
-      this.messages.push({ user, content });
-    });
+    this.profileService.getUserPrivateChats().subscribe(chats => {this.chats = chats});
+    
+    if (this.chatService.hubConnection) {
+      this.chatService.hubConnection.on('ReceiveMessage', (message: getMessage) => {
+        this.messages.push(message);
+        this.message = '';
+      });
+    }
   }
 
-  sendMessage() {
-    this.chatService.sendMessage(this.user, this.message);
-    this.message = '';
+  sendMessage(chatId: number, content: string){
+    this.chatService.sendMessage(chatId, content);
   }
-  
+
+  getMessages(chatId: number){
+    this.selectedChatId = chatId;
+    this.profileService.getChatMessages(chatId).subscribe(messages => {this.messages = messages});
+  }
 }

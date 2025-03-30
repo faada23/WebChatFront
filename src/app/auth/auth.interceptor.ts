@@ -5,11 +5,11 @@ import { catchError, of, throwError } from "rxjs";
 import { Router } from "@angular/router";
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
+
     const router = inject(Router);
 
     return next(req).pipe(
         catchError(error => {
-            console.log("error: " + error)
             if (error.status == 401) {
                 router.navigate(['/login'])
             }

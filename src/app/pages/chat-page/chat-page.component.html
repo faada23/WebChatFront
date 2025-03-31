@@ -11,7 +11,7 @@
     </div>
     
     <span class="input">
-      <input class="input-text" [(ngModel)]="message" placeholder="Type a message" />
+      <input autocomplete="off" class="input-text" [(ngModel)]="message" placeholder="Type a message" />
       <button class="send-msg-btn" (click)="sendMessage(selectedChatId!,message)">
         <img 
           class="send-msg-img" 

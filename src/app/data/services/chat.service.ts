@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { catchError, throwError } from 'rxjs';
 import { ProfileService } from './profile.service';
 import { getChat } from '../interfaces/getChat.interface';
 import { getMessage } from '../interfaces/getMessage.interface';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +15,18 @@ export class ChatService {
 
   constructor() {
     this.createConnection();
-    this.startConnection();
-    this.getChats();
+    this.startConnection()
   }
 
   private getChats(){
-    this.profileService.getUserPrivateChats().subscribe(chats => {this.chats  = chats});
-    this.JoinChats(this.chats);
+    this.profileService.getUserPrivateChats()
+      .pipe(
+        tap(chats => {
+          this.chats = chats;
+          this.JoinChats(chats);
+        })
+      )
+      .subscribe();
   }
 
   private createConnection(){
@@ -35,12 +40,8 @@ export class ChatService {
   private startConnection(){
     this.hubConnection
     ?.start()
+    .then(() => this.getChats())
     .catch(err => console.log('Error while starting connection: ' + err));
-
-    this.hubConnection?.on('ReceiveMessage', (message: getMessage) => {
-      console.log(`${message.content}`);
-  });
-
   }
 
   private JoinChats(chats: getChat[]){

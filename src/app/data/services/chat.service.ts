@@ -11,7 +11,6 @@ import { tap } from 'rxjs';
 export class ChatService {
   profileService = inject(ProfileService);
   hubConnection: HubConnection | null  = null;
-  chats: getChat[] = [];
 
   constructor() {
     this.createConnection();
@@ -22,7 +21,6 @@ export class ChatService {
     this.profileService.getUserPrivateChats()
       .pipe(
         tap(chats => {
-          this.chats = chats;
           this.JoinChats(chats);
         })
       )

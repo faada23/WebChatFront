@@ -4,11 +4,13 @@
     padding: 12px 16px;
     cursor: pointer;
     transition: background-color 0.2s;
+    background-color: none;
+    border-bottom: 1px solid #2d3245;
     gap: 12px;
-    border-bottom: 1px solid #eee;
+
   
     &:hover {
-      background-color: #f5f5f5;
+      background-color: #2d3245;
     }
   
     .chat-avatar {
@@ -32,7 +34,7 @@
       .chat-name {
         margin: 0;
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 400;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -41,7 +43,7 @@
       .chat-type {
         margin: 2px 0 0;
         font-size: 12px;
-        color: #666;
+        color: var(--light-color);
       }
     }
   }

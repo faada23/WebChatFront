@@ -2,7 +2,7 @@
 
 <div>
   <div class="chat-container">
-    <h2 class="chat-title mb16">Chat name</h2>
+    <h2 class="chat-title mb16">{{ getChatName() }}</h2>
     
     <div class="messages" #scrollContainer>
       <div *ngFor="let msg of messages" class="message">

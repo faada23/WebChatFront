@@ -4,10 +4,11 @@ import { getChat } from '../../data/interfaces/getChat.interface';
 import { SidebarChatComponent } from "../sidebar-chat/sidebar-chat.component";
 import { NgFor, NgIf } from '@angular/common';
 import { ChatPageComponent } from '../../pages/chat-page/chat-page.component';
+import { CreateChatComponent } from "../create-chat/create-chat.component";
 
 @Component({
   selector: 'app-sidebar',
-  imports: [SidebarChatComponent,NgIf,NgFor],
+  imports: [SidebarChatComponent, NgIf, NgFor, CreateChatComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
@@ -17,6 +18,7 @@ export class SidebarComponent {
 
   public chats : getChat[] = [];
   public selectedChatId: number | null = null;
+  isModalOpen = false;
 
   constructor() {
     this.loadChats();
@@ -32,5 +34,13 @@ export class SidebarComponent {
   onChatSelected(chatId: number) {
     this.selectedChatId = chatId;
     this.chatComponent.getMessages(chatId);  
+  }
+
+  toggleModal() {
+    this.isModalOpen = !this.isModalOpen;
+  }
+
+  onCreateChat(chatName: string) {
+    
   }
 }

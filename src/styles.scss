@@ -10,10 +10,11 @@
     --light-color: #FFFFFF;
     --dark-color: #1f232f;
     --inputBorder-color: #818182;
-    --scrollbarTrack-color: #2c2f33;
-    --scrollbarThumb-color: #7289da;
-    --scrollbarThumbHover-color: #5b6eae;
-    --sidebarBackgr-color: #394057;
+    --scrollbarDarkGrey-color: #2c2f33;
+    --scrollbarBlue-color: #7289da;
+    --scrollbarDarkBlue-color: #5b6eae;
+    --sidebarGrey-color: #394057;
+    --lightBlue-color: #7f98eb;
 }
 
 *,
@@ -34,15 +35,15 @@ body {
   }
   
   ::-webkit-scrollbar-track {
-    background: var(--scrollbarTrack-color); 
+    background: var(--scrollbarDarkGrey-color); 
     border-radius: 10px; 
   }
   
   ::-webkit-scrollbar-thumb {
-    background: var(--scrollbarThumb-color);
+    background: var(--scrollbarBlue-color);
     border-radius: 10px; 
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--scrollbarThumbHover-color);
+    background: var(--scrollbarDarkBlue-color);
   }

@@ -1,0 +1,25 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="closeModal()">&times;</button>
+    
+    <h2 class="text-regular">Create new chat</h2>
+    
+    <form [formGroup]="chatForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input
+          type="text"
+          formControlName="chatName"
+          placeholder="Enter username"
+          class="form-input"
+        >
+      </div>
+      
+      <button
+        type="submit"
+        class="create-btn"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>

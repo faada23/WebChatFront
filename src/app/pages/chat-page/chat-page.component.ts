@@ -6,6 +6,7 @@ import { NgForOf } from '@angular/common';
 import { FormsModule} from '@angular/forms';
 import { ProfileService } from '../../data/services/profile.service';
 import { tap } from 'rxjs';
+import { getChat } from '../../data/interfaces/getChat.interface';
 
 @Component({
   selector: 'app-chat',
@@ -20,8 +21,8 @@ export class ChatPageComponent implements AfterViewChecked{
   public user: string = '';
   public message: string = '';
   public messages: getMessage[] = []; 
-  public chats: any[] = [];
-  public selectedChatId: number |null = null;
+  public chats: getChat[] = [];
+  public selectedChatId: number | null = null;
   
   @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
   public shouldScroll: boolean = false;
@@ -62,5 +63,12 @@ export class ChatPageComponent implements AfterViewChecked{
         }))
       )
       .subscribe();
+  }
+  
+  getChatName(){
+    if(this.selectedChatId != null){
+      return this.chats.find((item) => item.id == this.selectedChatId)?.name
+    }
+    return "Chat name"
   }
 }

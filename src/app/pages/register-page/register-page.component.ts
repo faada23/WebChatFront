@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.Service';
 
 @Component({
-  selector: 'app-login-page',
+  selector: 'app-register-page',
   imports: [ReactiveFormsModule],
-  templateUrl: './login-page.component.html',
-  styleUrl: './login-page.component.scss'
+  templateUrl: './register-page.component.html',
+  styleUrl: './register-page.component.scss'
 })
-export class LoginPageComponent {
+export class RegisterPageComponent {
   authService = inject(AuthService);
   router = inject(Router)
   
@@ -21,14 +21,14 @@ export class LoginPageComponent {
   onSubmit(){
     if(this.form.valid){
       //@ts-ignore 
-      this.authService.login(this.form.value).subscribe(
+      this.authService.register(this.form.value).subscribe(
         () => {
-          this.router.navigate([''])
+          this.router.navigate(['/login'])
         })
     }    
   }
 
-  navigateToRegister() {
-    this.router.navigate(['/register']); 
+  navigateToLogin() {
+    this.router.navigate(['/login']);
 }
 }

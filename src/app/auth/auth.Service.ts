@@ -26,6 +26,18 @@ export class AuthService {
       )
   }
 
+  register(payload: {username: string, password: string})
+  {
+    const fd = new FormData();
+
+    fd.append('username', payload.username);
+    fd.append('password', payload.password);
+
+    return this.http.post(
+        `${this.baseApiUrl}Register`, fd, { withCredentials: true }
+      )
+  }
+
   CheckAuth(){
     return this.http.get(`${this.baseApiUrl}check`, {withCredentials: true}).pipe(
       map(() => true),

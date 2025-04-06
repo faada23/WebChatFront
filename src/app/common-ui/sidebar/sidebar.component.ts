@@ -41,7 +41,7 @@ export class SidebarComponent {
     this.isModalOpen = !this.isModalOpen;
   }
 
-  onCreateChat(chatName: string) {
-    
+  onCreateChat(joinUserId: string) {
+    this.profileService.createUserPrivateChat(Number(joinUserId)).subscribe();
   }
 }

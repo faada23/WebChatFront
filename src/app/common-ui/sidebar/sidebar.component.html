@@ -12,12 +12,12 @@
     
     <div class="chats-list">
       <app-sidebar-chat 
-        *ngFor="let chat of chats"
+        *ngFor="let chat of pagedChats?.data"
         [chat]="chat"
         (selected)="onChatSelected($event)"
       ></app-sidebar-chat>
       
-      <div *ngIf="chats.length === 0" class="no-chats">
+      <div *ngIf="pagedChats?.data?.length === 0" class="no-chats">
         No chats available
       </div>
     </div>

@@ -21,7 +21,7 @@ export class ChatService {
     this.profileService.getUserPrivateChats()
       .pipe(
         tap(chats => {
-          this.JoinChats(chats);
+          this.JoinChats(chats.data);
         })
       )
       .subscribe();

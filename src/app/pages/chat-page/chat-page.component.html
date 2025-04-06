@@ -4,8 +4,9 @@
   <div class="chat-container">
     <h2 class="chat-title mb16">{{ getChatName() }}</h2>
     
-    <div class="messages" #scrollContainer>
-      <div *ngFor="let msg of messages" class="message">
+    <div class="messages" #scrollContainer (scroll)="onScroll()">
+      <div *ngIf="isLoading" class="loading-indicator">Загрузка...</div>
+      <div *ngFor="let msg of pagedMessages?.data" class="message">
         <strong>{{ msg.sender.username }}:</strong> {{ msg.content }}
       </div>
     </div>

@@ -6,8 +6,13 @@
     
     <div class="messages" #scrollContainer (scroll)="onScroll()">
       <div *ngIf="isLoading" class="loading-indicator">Загрузка...</div>
-      <div *ngFor="let msg of pagedMessages?.data" class="message">
-        <strong>{{ msg.sender.username }}:</strong> {{ msg.content }}
+      <div 
+        *ngFor="let msg of pagedMessages?.data" 
+        class="message"
+        [class.my-message]="isMyMessage(msg)"
+      >
+        <span>{{ msg.content }}</span>
+        <span class="time">{{msg.createdDate| date:'shortTime'}}</span>
       </div>
     </div>
     

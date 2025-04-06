@@ -2,7 +2,7 @@ import { AfterViewChecked, Component, ElementRef, inject, ViewChild} from '@angu
 import { SidebarComponent } from "../../common-ui/sidebar/sidebar.component";
 import { ChatService } from '../../data/services/chat.service';
 import { getMessage } from '../../data/interfaces/getMessage.interface';
-import { NgForOf, NgIf } from '@angular/common';
+import { DatePipe, NgForOf, NgIf } from '@angular/common';
 import { FormsModule} from '@angular/forms';
 import { ProfileService } from '../../data/services/profile.service';
 import { catchError, finalize, of, tap } from 'rxjs';
@@ -11,7 +11,7 @@ import { PagedResponse } from '../../data/interfaces/PagedResponse.interface';
 
 @Component({
   selector: 'app-chat',
-  imports: [SidebarComponent, NgForOf, FormsModule,NgIf],
+  imports: [SidebarComponent, NgForOf, FormsModule,NgIf,DatePipe],
   templateUrl: './chat-page.component.html',
   styleUrl: './chat-page.component.scss'
 })
@@ -134,5 +134,10 @@ export class ChatPageComponent implements AfterViewChecked{
 
   private hasNextPage(){
     return this.currentPage < Math.ceil(this.pagedMessages!.totalItems / this.pageSize);
+  }
+
+  // Private chat name == username of second user 
+  isMyMessage(message: getMessage) {
+    return message.sender.username !== this.getChatName(); 
   }
 }

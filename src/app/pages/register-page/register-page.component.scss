@@ -51,6 +51,11 @@
             background-color: var(--grey-color);
             color: var(--light-color);
             cursor: pointer;
+
+            &:hover{
+                opacity: 0.7;
+                transition: 0.2s;
+            }
         }
     
     }

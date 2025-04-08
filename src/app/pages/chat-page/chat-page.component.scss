@@ -1,6 +1,6 @@
 :host {
   display: grid;
-  grid-template-columns: 550px 1fr;
+  grid-template-columns: 32% 1fr;
   height: 100vh;
   position: relative;
 }
@@ -13,15 +13,41 @@
   background-color: var(--backGr-Color);
   position: relative;
 
-  .chat-title {
-   max-height: fit-content;
-   width: 100%;
-   text-align: center;
-   font-size: 15px;
-   line-height: 100%;
-   letter-spacing: 1px;
-   font-weight: 400;
-  }
+  .chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  
+
+    .chat-title {
+    max-height: fit-content;
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 1px;
+    font-weight: 400;
+    }
+
+    .logout-btn {
+      position: absolute;
+      top: 0.8%; 
+      right: 0.7%; 
+      background: var(--dark-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 5px 30px;
+      cursor: pointer;
+      transition: 0.2s;
+      opacity: 0.7;
+    
+      &:hover {
+        opacity: 1.0;
+      }
+    }
+  } 
 }
 
 .messages {
@@ -32,7 +58,7 @@
   flex-direction: column;
   gap: 8px;
   margin-bottom: 50px;
-  padding-right: 5px;
+  padding-right: 10px;
 
   .message {
     background-color: var(--greyMessage-color);
@@ -62,7 +88,7 @@
 .input {
   position: fixed; 
   bottom: 20px;
-  left: 580px; 
+  left: 35%; 
   right: 20px;
 
 
@@ -93,6 +119,7 @@
     }
   }
 }
+
 
 
 

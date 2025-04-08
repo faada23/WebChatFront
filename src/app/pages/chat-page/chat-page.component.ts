@@ -8,6 +8,7 @@ import { ProfileService } from '../../data/services/profile.service';
 import { catchError, finalize, of, tap } from 'rxjs';
 import { getChat } from '../../data/interfaces/getChat.interface';
 import { PagedResponse } from '../../data/interfaces/PagedResponse.interface';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -18,7 +19,8 @@ import { PagedResponse } from '../../data/interfaces/PagedResponse.interface';
 
 export class ChatPageComponent implements AfterViewChecked{
   profileService = inject(ProfileService);
-  
+  router = inject(Router);
+
   public user: string = '';
   public message: string = '';
   public pagedMessages: PagedResponse<getMessage> | null = null; 
@@ -139,5 +141,14 @@ export class ChatPageComponent implements AfterViewChecked{
   // Private chat name == username of second user 
   isMyMessage(message: getMessage) {
     return message.sender.username !== this.getChatName(); 
+  }
+
+  Logout(){
+    this.profileService.logout().pipe(
+      tap(() =>{
+        this.router.navigate(['/login'])
+        }
+      )
+    ).subscribe()
   }
 }

@@ -43,4 +43,10 @@ export class ProfileService {
     );
   }
 
+  logout() {
+    return this.http.post(`${this.baseApiUrl}auth/logout`,
+      {}, 
+      { withCredentials: true }
+    );
+  }
 }

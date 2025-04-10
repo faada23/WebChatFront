@@ -82,7 +82,7 @@ export class ChatPageComponent implements AfterViewChecked{
           this.pagedMessages!.data.unshift(...newMessages.data);
           this.hasMoreMessages = this.hasNextPage();
 
-          this.adjustScrollPosition(prevScrollHeight-2);
+          this.adjustScrollPosition(prevScrollHeight);
           
         },
         error: () => this.currentPage = prevPage

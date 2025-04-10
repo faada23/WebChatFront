@@ -10,7 +10,7 @@
       <button class="close-sidebar-btn" (click)="toggleSidebar()">☰</button>
     </div>
     
-    <div class="chats-list">
+    <div class="chats-list" #scrollContainer (scroll)="onScroll()">
       <app-sidebar-chat 
         *ngFor="let chat of pagedChats?.data"
         [chat]="chat"

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { ProfileService } from '../../data/services/profile.service';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
 import { PagedResponse } from '../../data/interfaces/PagedResponse.interface';
 import { getUser } from '../../data/interfaces/getUser.interface';
 import { NgFor, NgIf } from '@angular/common';
@@ -20,6 +20,9 @@ export class CreateChatComponent implements OnInit {
   usersList: getUser[] = [];
   showUsersList = false;
   selectedUser: getUser | null = null;
+
+  showMessage = false;
+  Message = '';
 
   constructor(
     private fb: FormBuilder,
@@ -77,4 +80,5 @@ export class CreateChatComponent implements OnInit {
     this.close.emit();
     this.usersList = [];
   }
+
 }

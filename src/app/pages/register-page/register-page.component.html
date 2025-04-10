@@ -23,5 +23,8 @@
         </label>
         <button class="register-btn">Register</button>
     </form>
+    <div class="notification" [class.show]="showError">
+        {{ errorMessage }}
+      </div>
     <button class="to-login-btn" (click)="navigateToLogin()">already have an account?</button>
 </div>

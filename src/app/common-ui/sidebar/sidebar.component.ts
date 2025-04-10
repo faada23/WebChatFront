@@ -6,7 +6,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { ChatPageComponent } from '../../pages/chat-page/chat-page.component';
 import { CreateChatComponent } from "../create-chat/create-chat.component";
 import { PagedResponse } from '../../data/interfaces/PagedResponse.interface';
-import { finalize, tap } from 'rxjs';
+import { catchError, finalize, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -26,6 +26,10 @@ export class SidebarComponent {
   public hasMoreChats: boolean = true;
   isModalOpen = false;
   mediaAdaptiveWidth = 768;
+
+  showError = false;
+  showSuccess = false;
+  Message = '';
 
   @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
 
@@ -112,10 +116,28 @@ export class SidebarComponent {
   }
 
   onCreateChat(joinUserId: string) {
-    this.profileService.createUserPrivateChat(Number(joinUserId)).subscribe();
+    this.profileService.createUserPrivateChat(Number(joinUserId)).pipe(
+      tap(() => this.showNotification("Chat added Successfully",true)),
+      catchError(() =>{
+        this.showNotification("Error while adding chat",false);
+        return of();
+      })
+    )
+    .subscribe();
   }
 
   toggleSidebar(){
     this.chatComponent.toggleSidebar();
+  }
+
+  private showNotification(message: string, success: boolean) {
+    this.Message = message;
+    if(success) this.showSuccess = true;
+    else this.showError = true;
+    
+    setTimeout(() => {
+      this.showSuccess = false;
+      this.showError = false;
+    }, 5000);
   }
 }

@@ -30,7 +30,8 @@ export class ChatPageComponent implements AfterViewChecked{
   public pageSize: number = 20;
   public isLoading: boolean = false;
   public hasMoreMessages: boolean = true;
-  
+  isSidebarCollapsed = false;
+
   @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
   public shouldScroll: boolean = false;
 
@@ -57,6 +58,10 @@ export class ChatPageComponent implements AfterViewChecked{
     }
   }
 
+  toggleSidebar() {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  }
+  
   private loadNextPage() {
     if (!this.selectedChatId || this.isLoading || !this.hasMoreMessages) return;
 

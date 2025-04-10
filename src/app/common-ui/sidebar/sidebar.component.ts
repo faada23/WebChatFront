@@ -20,6 +20,7 @@ export class SidebarComponent {
   public pagedChats : PagedResponse<getChat> | null = null;
   public selectedChatId: number | null = null;
   isModalOpen = false;
+  mediaAdaptiveWidth = 768;
 
   constructor() {
     this.loadChats();
@@ -33,6 +34,9 @@ export class SidebarComponent {
   }
 
   onChatSelected(chatId: number) {
+    if (window.innerWidth <= this.mediaAdaptiveWidth) {
+        this.chatComponent.isSidebarCollapsed = true;
+    }
     this.selectedChatId = chatId;
     this.chatComponent.getMessages(chatId);  
   }
@@ -43,5 +47,9 @@ export class SidebarComponent {
 
   onCreateChat(joinUserId: string) {
     this.profileService.createUserPrivateChat(Number(joinUserId)).subscribe();
+  }
+
+  toggleSidebar(){
+    this.chatComponent.toggleSidebar();
   }
 }

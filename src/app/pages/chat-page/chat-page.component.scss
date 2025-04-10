@@ -1,24 +1,49 @@
 :host {
-  display: grid;
-  grid-template-columns: 32% 1fr;
+  display: flex;
   height: 100vh;
   position: relative;
 }
 
+app-sidebar {
+  width: 32%;
+  transition: width 0.1s;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    transition: 0.2s;
+  }
+}
+
+app-sidebar.collapsed {
+  transition: 0.1s;
+  width: 7%;
+
+  @media (max-width: 768px) {
+    width: 0%;
+  }
+}
+
 .chat-container {
   display: flex;
+  flex: 1;
+  min-width: 0;
   flex-direction: column;
   height: calc(100vh - 20px);
+  
   padding: 10px;
   background-color: var(--backGr-Color);
-  position: relative;
+
+  @media (max-width: 768px) {
+    display: none;
+    transition: 0.2s;
+  }
 
   .chat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
-  
 
     .chat-title {
     max-height: fit-content;
@@ -51,11 +76,12 @@
 }
 
 .messages {
-  flex: 1;
-  overflow-y: auto;
-  scroll-behavior: smooth;
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  scroll-behavior: smooth;
   gap: 8px;
   margin-bottom: 50px;
   padding-right: 10px;
@@ -64,10 +90,14 @@
     background-color: var(--greyMessage-color);
     border-radius: 20px;
     padding: 10px;
-    max-width: 70%;
+    max-width: 45%;
     width:fit-content;
     overflow-wrap: break-word;
     font-weight: 300;
+
+    @media (max-width: 768px) {
+      max-width: 70%;
+    }
 
     &.my-message {
       align-self: flex-end;
@@ -87,10 +117,16 @@
 
 .input {
   position: fixed; 
-  bottom: 20px;
+  bottom: 3%;
   left: 35%; 
-  right: 20px;
+  right: 2%;
+  transition: 0.1s;
+  max-height: 10%;
+  margin-top: calc(40px);
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   .input-text {
     color: var(--light-color);
@@ -99,26 +135,50 @@
     border-radius: 10px;
     position: relative;
     width: calc(100% - 60px);
-    padding: 12px;
+    overflow-y: auto;
+    resize: none;
+    padding: 10px; 
+    transition: height 0.2s;
   }
 
   .send-msg-btn {
-    position: absolute;
+    position: sticky;
     z-index: 1;
     background-color: transparent;
     border: none;
-    right: 50px;
-    top: 54%;
-    transform: translateY(-50%);
+    right: 0%;
+    bottom: 0%;
+    border-radius: 10px;
+    transform: translate();
     cursor: pointer;
 
     .send-msg-img {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
+      border-radius: 0%;
 
     }
   }
 }
+
+app-sidebar.collapsed ~ .chat-container .input {
+  left: 10%;
+  right: 0;
+  transition: 0.1s;
+
+  @media (max-width: 768px) {
+    
+  }
+}
+
+app-sidebar.collapsed ~ .chat-container{
+  
+  @media (max-width: 768px) {
+    display: flex;
+    opacity: 1;
+  }
+}
+
 
 
 

@@ -38,10 +38,11 @@
 
 .chats-list {
     flex: 1; 
-    overflow-y: auto; 
+    overflow: auto;
 }
 
 .header-text {
+    display: flex;
     font-weight: 400;
     font-size: medium;
     line-height: 40px;
@@ -63,3 +64,43 @@
         transition: 0.2s;
     }
 }
+
+:host.collapsed ::ng-deep .chat-info {
+    display: none;
+  }
+  
+:host.collapsed ::ng-deep .chat-item {
+    justify-content: center;
+}
+:host.collapsed .header-text {
+    justify-self: left;
+    display: none;
+  }
+
+:host.collapsed .chat-btn-container {
+    align-self: center;    
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
+:host.collapsed .close-sidebar-btn {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translate(-50%, -50%);
+    margin-bottom: 10px;
+
+    @media (max-width: 768px) {
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+      }
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px; 
+  }

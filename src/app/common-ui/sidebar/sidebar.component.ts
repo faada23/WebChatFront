@@ -60,14 +60,10 @@ export class SidebarComponent {
     ).pipe(
       tap({
         next: newChats => {
-          const element = this.scrollContainer.nativeElement;
-          const prevScrollHeight = element.scrollHeight;
           
           this.pagedChats!.data.push(...newChats.data);
           this.hasMoreChats = this.hasNextPage();
 
-          this.adjustScrollPosition(prevScrollHeight);
-          
         },
         error: () => this.currentPage = prevPage
       }),
@@ -75,19 +71,6 @@ export class SidebarComponent {
     ).subscribe();
   } 
   
-  private adjustScrollPosition(prevScrollHeight: number) {
-    const element = this.scrollContainer.nativeElement;
-    const scrollTopBeforeLoad = element.scrollTop;
-    
-    setTimeout(() => {
-      const heightDifference = element.scrollHeight - prevScrollHeight;
-      element.scrollTop = scrollTopBeforeLoad + heightDifference;
-      
-      const SAFETY_OFFSET = 10;
-      element.scrollTop += SAFETY_OFFSET;
-    }, 0);
-  }
-
   onScroll() {
     if (this.isLoading || !this.hasMoreChats) return;
 

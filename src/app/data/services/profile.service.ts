@@ -13,11 +13,19 @@ export class ProfileService {
 
   baseApiUrl = 'http://localhost:5002/';
 
-  getUserPrivateChats(pageNumber: number = 1, pageSize: number = 20) {
-    return this.http.get<PagedResponse<getChat>>(
-      `${this.baseApiUrl}chat/PrivateChat?Page=${pageNumber}&PageSize=${pageSize}`,
-      { withCredentials: true }
-    );
+  getUserPrivateChats(pageNumber: number | null = null, pageSize: number | null = null) {
+    if(pageNumber && pageSize){
+      return this.http.get<PagedResponse<getChat>>(
+        `${this.baseApiUrl}chat/PrivateChat?Page=${pageNumber}&PageSize=${pageSize}`,
+        { withCredentials: true }
+      );
+    }
+    else{
+      return this.http.get<PagedResponse<getChat>>(
+        `${this.baseApiUrl}chat/PrivateChat`,
+        { withCredentials: true }
+      );
+    }
   }
 
   createUserPrivateChat(joinUserId: number){

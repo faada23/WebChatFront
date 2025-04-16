@@ -76,13 +76,9 @@ export class ChatPageComponent implements AfterViewChecked{
     ).pipe(
       tap({
         next: newMessages => {
-          const element = this.scrollContainer.nativeElement;
-          const prevScrollHeight = element.scrollHeight;
-          
+
           this.pagedMessages!.data.unshift(...newMessages.data);
           this.hasMoreMessages = this.hasNextPage();
-
-          this.adjustScrollPosition(prevScrollHeight);
           
         },
         error: () => this.currentPage = prevPage
@@ -92,11 +88,13 @@ export class ChatPageComponent implements AfterViewChecked{
   } 
 
   ngAfterViewChecked(): void {
-    if(this.shouldScroll){
-      const element = this.scrollContainer.nativeElement;
-      element.scrollTop = element.scrollHeight;
-      this.shouldScroll = false;
-    } 
+    if (this.shouldScroll) {
+      setTimeout(() => {
+        const element = this.scrollContainer.nativeElement;
+        element.scrollTop = element.scrollHeight;
+        this.shouldScroll = false;
+      }, 25);
+    }
   }
 
   sendMessage(chatId: number, content: string){
@@ -117,6 +115,7 @@ export class ChatPageComponent implements AfterViewChecked{
         }))
       )
       .subscribe();
+
   }
   
   getChatName(){
@@ -126,26 +125,13 @@ export class ChatPageComponent implements AfterViewChecked{
     return "Chat name"
   }
 
-  private adjustScrollPosition(prevScrollHeight: number) {
-    const element = this.scrollContainer.nativeElement;
-    const scrollTopBeforeLoad = element.scrollTop;
-    
-    setTimeout(() => {
-      const heightDifference = element.scrollHeight - prevScrollHeight;
-      element.scrollTop = scrollTopBeforeLoad + heightDifference;
-      
-      const SAFETY_OFFSET = 10;
-      element.scrollTop += SAFETY_OFFSET;
-    }, 0);
-  }
-
   private hasNextPage(){
     return this.currentPage < Math.ceil(this.pagedMessages!.totalItems / this.pageSize);
   }
 
   // Private chat name == username of second user 
   isMyMessage(message: getMessage) {
-    return message.sender.username !== this.getChatName(); 
+    return message.sender.username != this.getChatName(); 
   }
 
   Logout(){

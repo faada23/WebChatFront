@@ -3,7 +3,7 @@ import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { ProfileService } from './profile.service';
 import { getChat } from '../interfaces/getChat.interface';
 import { getMessage } from '../interfaces/getMessage.interface';
-import { tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,10 @@ export class ChatService {
       .pipe(
         tap(chats => {
           this.JoinChats(chats.data);
+        }),
+        catchError((err) => {
+          console.error('Failed to get user chats for joining SignalR groups:', err);
+          return of();
         })
       )
       .subscribe();

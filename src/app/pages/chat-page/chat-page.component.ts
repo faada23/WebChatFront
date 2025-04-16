@@ -134,10 +134,14 @@ export class ChatPageComponent implements AfterViewChecked{
     return message.sender.username != this.getChatName(); 
   }
 
-  Logout(){
+  async Logout(){
+    await this.chatService.hubConnection?.stop();
+    this.chatService.hubConnection = null;
     this.profileService.logout().pipe(
       tap(() =>{
         this.router.navigate(['/login'])
+            .then(() =>
+              window.location.reload());
         }
       )
     ).subscribe()

@@ -100,7 +100,10 @@ export class SidebarComponent {
 
   onCreateChat(joinUserId: string) {
     this.profileService.createUserPrivateChat(Number(joinUserId)).pipe(
-      tap(() => this.showNotification("Chat added Successfully",true)),
+      tap(() => {
+        this.showNotification("Chat added Successfully",true);
+        window.location.reload();
+      }),
       catchError(() =>{
         this.showNotification("Error while adding chat",false);
         return of();

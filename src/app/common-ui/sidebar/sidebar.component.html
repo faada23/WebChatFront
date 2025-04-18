@@ -1,0 +1,33 @@
+<div class="sidebar-container">
+    <app-create-chat
+      *ngIf="isModalOpen"
+      (createChat)="onCreateChat($event)"
+      (close)="toggleModal()"
+    ></app-create-chat>
+
+    <div class="header">
+      <h2 class="header-text">Chats</h2>
+      <button class="close-sidebar-btn" (click)="toggleSidebar()">☰</button>
+    </div>
+    
+    <div class="chats-list" #scrollContainer (scroll)="onScroll()">
+      <app-sidebar-chat 
+        *ngFor="let chat of pagedChats?.data"
+        [chat]="chat"
+        (selected)="onChatSelected($event)"
+      ></app-sidebar-chat>
+      
+      <div *ngIf="pagedChats?.data?.length === 0" class="no-chats">
+        No chats available
+      </div>
+    </div>
+
+    <div class="chat-btn-container">
+      <button class="add-chat-btn" (click)="toggleModal()">+
+
+      </button>
+    </div>
+    <div class="notification" [class.showError]="showError" [class.showSuccess]="showSuccess">
+      {{ Message }}
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="closeModal()">&times;</button>
+    
+    <h2 class="text-regular">Create new chat</h2>
+    
+    <form [formGroup]="chatForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input
+          type="text"
+          formControlName="chatName"
+          placeholder="Enter username"
+          class="form-input"
+          autocomplete="off"
+          (focus)="showUsersList = true"
+        >
+        
+        <div class="users-list" *ngIf="showUsersList && usersList.length > 0">
+          <div 
+            class="user-item" 
+            *ngFor="let user of usersList"
+            (click)="selectUser(user)"
+          >
+            {{ user.username }}
+          </div>
+        </div>
+
+        <div *ngIf="!selectedUser && chatForm.value.chatName" class="error-message">
+          Please select a user from the dropdown list
+        </div>
+      </div>
+      
+      <button
+        type="submit"
+        class="create-btn"
+        [disabled]="!selectedUser"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>

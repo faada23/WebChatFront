@@ -1,0 +1,30 @@
+<h1 class="title">WebChat</h1>
+
+<div class="container">
+
+    <form action="" class="login-form" 
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        >
+        
+        <label class="input-label mb26">
+            Login
+            <input formControlName = "username" 
+            class="input-text mt6" type="text" placeholder="Enter login">
+        </label>
+        
+        <label class="input-label mb26">
+            Password
+            
+            <input 
+            formControlName = "password" 
+            class="input-text mt6"
+            placeholder="Enter password">
+        </label>
+        <button class="login-btn">Login</button>
+    </form>
+    <div class="notification" [class.show]="showError">
+        {{ errorMessage }}
+      </div>
+    <button class="to-register-btn" (click)="navigateToRegister()">register new account</button>
+</div>

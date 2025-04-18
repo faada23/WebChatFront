@@ -1,0 +1,97 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+
+  
+  .modal-content {
+    background: var(--light-color);
+    padding: 2rem;
+    border-radius: 8px;
+    position: relative;
+    width: 35%;
+    height: 55%;
+
+    @media (max-width: 768px) {
+      width: 90%;
+      height: 65% ;
+      transition: 0.2s;
+    }
+  }
+
+  .text-regular {
+    color: var(--dark-color);
+    font-weight: 400;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .form-group {
+    margin: 20px 0;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--dark-color);
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .create-btn {
+    position: absolute;
+    bottom: 5%;
+    right: 25%;
+    width: 50%;
+    background-color: var(--lightBlue-color);
+    color: var(--light-color);
+    padding: 2% 5%;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    justify-content: center;
+
+    &:hover {
+      background-color: var(--scrollbarDarkBlue-color);
+    }
+
+  }
+
+  .users-list {
+    position: absolute;
+    width: 80%;
+    max-height: fit-content;
+    background: var(--darkMessage-color);
+    border-radius: 4px;
+    z-index: 1000;
+  }
+  
+  .user-item {
+    padding: 12px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: var(--grey-color);
+    }
+  }
+}
+

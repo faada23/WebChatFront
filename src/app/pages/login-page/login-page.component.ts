@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.Service';
@@ -9,12 +9,18 @@ import { AuthService } from '../../auth/auth.Service';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements OnInit {
   authService = inject(AuthService);
   router = inject(Router)
   
   showError = false;
   errorMessage = '';
+
+  ngOnInit() {
+    if (this.authService.CheckAuth()) {
+      this.router.navigate([''], { replaceUrl: true });
+    }
+  }
 
   form = new FormGroup({
     password: new FormControl<string | null>(null,Validators.required),
@@ -26,7 +32,7 @@ export class LoginPageComponent {
       //@ts-ignore 
       this.authService.login(this.form.value).subscribe({
         next: () => {
-          this.router.navigate(['']);
+          this.router.navigate([''], { replaceUrl: true });
         },
         error: (error) => {
           if (error.status === 500) {
